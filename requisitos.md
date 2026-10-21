@@ -1,7 +1,8 @@
 # Cara e Coroa
 
 ## Objetivos
-- criar um site de cara ou coroa em que eu possa personalizar as moedas.
+- criar um site de cara ou coroa para rolagem
+- criar uma opção em que eu possa personalizar as moedas.
 - os registros devem ser feitos todos salvos na maquina local recuperados por cookies
 - ter uma area dedicada tipo um dashboard de uso de cara ou coroa.
 - verificar se a escolha equivale ao resultado
