@@ -1,7 +1,10 @@
 # Cara e Coroa
 
 ## Objetivos
-
+- criar um site de cara ou coroa em que eu possa personalizar as moedas.
+- os registros devem ser feitos todos salvos na maquina local recuperados por cookies
+- ter uma area dedicada tipo um dashboard de uso de cara ou coroa.
+- verificar se a escolha equivale ao resultado
 
 ### Stack Tecnlógico
 - Backend: PHP estruturado com sessões nativas
@@ -9,9 +12,11 @@
 - Frontend: HTML5, PHP, CSS, Tailwind CSS
 
 #### Regras de negócio (CORE)
-Tratar senhas de usuários com hash bcript
 O sistema deve ter uma página de históricos e manter sempre os logs de qualquer alteração feita por 
 qualquer usuário, para auditorias futuras.
+- a cada duas troca de escolha um modal de anuncio de 10 segundos
+- verificar se a escolha equivale ao resultado
+  
 
 
 
