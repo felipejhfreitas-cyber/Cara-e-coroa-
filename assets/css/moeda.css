@@ -1,0 +1,160 @@
+/* ==========================================================
+   Estilos da Moeda 3D e Animações de Rolagem
+   Arquivo: assets/css/moeda.css
+   ========================================================== */
+
+.coin-container {
+    perspective: 1200px;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.coin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.coin-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 0 0 10px rgba(255, 255, 255, 0.25),
+        inset 0 0 25px rgba(0, 0, 0, 0.4),
+        0 15px 35px rgba(0, 0, 0, 0.35);
+    user-select: none;
+    overflow: hidden;
+}
+
+.coin-front {
+    transform: rotateY(0deg);
+}
+
+.coin-back {
+    transform: rotateY(180deg);
+}
+
+/* Bordas serrilhadas da moeda */
+.coin-rim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 3px dashed rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+/* Temas de cores da moeda */
+/* 1. Dourado (Padrão) */
+.coin-theme-dourado .coin-face {
+    background: radial-gradient(circle at 35% 35%, #fff176, #fbc02d 40%, #f57f17 85%, #e65100);
+    color: #4a2c00;
+}
+.coin-theme-dourado .coin-rim {
+    border-color: rgba(255, 235, 59, 0.4);
+}
+
+/* 2. Prateado */
+.coin-theme-prateado .coin-face {
+    background: radial-gradient(circle at 35% 35%, #ffffff, #cfd8dc 40%, #90a4ae 80%, #546e7a);
+    color: #1a252f;
+}
+
+/* 3. Bronze */
+.coin-theme-bronze .coin-face {
+    background: radial-gradient(circle at 35% 35%, #ffcc80, #d87d39 45%, #a44e18 85%, #5d2800);
+    color: #2b1100;
+}
+
+/* 4. Cyberpunk Neon */
+.coin-theme-cyberpunk .coin-face {
+    background: radial-gradient(circle at 35% 35%, #00ffff, #0077b6 40%, #03045e 80%, #7209b7);
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+}
+
+/* 5. Rubi Vermelho */
+.coin-theme-rubi .coin-face {
+    background: radial-gradient(circle at 35% 35%, #ff8a80, #d50000 45%, #880e4f 85%, #4a001b);
+    color: #ffebee;
+}
+
+/* 6. Esmeralda */
+.coin-theme-esmeralda .coin-face {
+    background: radial-gradient(circle at 35% 35%, #a7f3d0, #10b981 40%, #047857 80%, #064e3b);
+    color: #ecfdf5;
+}
+
+/* 7. Dark Luxo */
+.coin-theme-dark .coin-face {
+    background: radial-gradient(circle at 35% 35%, #64748b, #334155 40%, #0f172a 85%, #020617);
+    color: #f8fafc;
+}
+
+/* Brilho dinâmico */
+.coin-face::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.1) 40%, 
+        transparent 60%
+    );
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+/* Efeito de sombra no chão */
+.coin-shadow {
+    width: 170px;
+    height: 24px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 75%);
+    margin: 25px auto 0 auto;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.coin-flipping .coin-shadow {
+    animation: shadowPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: scale(0.45);
+        opacity: 0.15;
+    }
+}
+
+/* Efeito de confete ou vitória */
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop {
+    animation: popIn 0.4s ease-out forwards;
+}

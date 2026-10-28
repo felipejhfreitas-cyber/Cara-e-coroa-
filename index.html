@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara ou Coroa — Sistema Oficial</title>
+    <!-- Tailwind CSS Oficial via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/moeda.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-display { font-family: 'Outfit', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- Barra de Navegação Superior -->
+    <header class="sticky top-0 z-40 bg-slate-900/85 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logotipo -->
+                <div class="flex items-center gap-2.5 cursor-pointer" onclick="navegarPara('jogar')">
+                    <span class="text-2xl transform hover:rotate-12 transition">🪙</span>
+                    <span class="font-display font-extrabold text-xl tracking-tight bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent">
+                        Cara ou Coroa
+                    </span>
+                </div>
+
+                <!-- Abas Desktop -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <button onclick="navegarPara('jogar')" id="nav-btn-jogar" class="nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                        🎮 Jogar
+                    </button>
+                    <button onclick="navegarPara('personalizar')" id="nav-btn-personalizar" class="nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+                        🎨 Personalizar Moeda
+                    </button>
+                    <button onclick="navegarPara('dashboard')" id="nav-btn-dashboard" class="nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+                        📊 Dashboard
+                    </button>
+                    <button onclick="navegarPara('historico')" id="nav-btn-historico" class="nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+                        📜 Histórico & Auditoria
+                    </button>
+                </nav>
+
+                <!-- Status de Cookies & Armazenamento -->
+                <div class="hidden lg:flex items-center gap-3 text-xs">
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/80 text-slate-300" title="Registros recuperados e salvos localmente por cookies">
+                        <span>🍪</span>
+                        <span>Cookies: <strong class="text-amber-400">Ativos</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/50 text-emerald-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Auditoria CORE Ativa</span>
+                    </div>
+                </div>
+
+                <!-- Botão Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-900 px-4 pt-2 pb-4 space-y-1">
+            <button onclick="navegarPara('jogar')" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">
+                🎮 Jogar
+            </button>
+            <button onclick="navegarPara('personalizar')" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">
+                🎨 Personalizar Moeda
+            </button>
+            <button onclick="navegarPara('dashboard')" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">
+                📊 Dashboard
+            </button>
+            <button onclick="navegarPara('historico')" class="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800">
+                📜 Histórico & Auditoria
+            </button>
+            <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span>🍪 Cookies Locais: Ativos</span>
+                <span class="text-emerald-400">Auditoria CORE</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Dinâmico SPA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- ==========================================================
+             SEÇÃO 1: JOGO DE CARA OU COROA
+             ========================================================== -->
+        <section id="view-jogar" class="view-panel max-w-4xl mx-auto space-y-8">
+            <div class="text-center space-y-2">
+                <h1 class="font-display font-black text-3xl sm:text-5xl tracking-tight bg-gradient-to-r from-amber-300 via-amber-100 to-amber-400 bg-clip-text text-transparent">
+                    Lançar Cara ou Coroa
+                </h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+                    Faça sua aposta, role a moeda 3D e confira se a sua escolha equivale ao resultado sorteado!
+                </p>
+            </div>
+
+            <!-- Banner Informativo: Regra de Negócio dos Anúncios -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
+                <div class="flex items-center gap-2">
+                    <span class="p-1.5 bg-amber-500/10 text-amber-400 rounded-lg">⚡</span>
+                    <span><strong>Regra do Jogo:</strong> A cada <strong>2 trocas de escolha</strong>, um anúncio obrigatório de 10s será exibido.</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800">
+                    <span class="text-slate-400">Trocas efetuadas:</span>
+                    <span id="badge-total-trocas" class="font-mono font-bold text-amber-400">0</span>
+                    <span class="text-slate-500">|</span>
+                    <span class="text-slate-400">Próximo anúncio em:</span>
+                    <span id="badge-proximo-anuncio" class="font-mono font-bold text-emerald-400">2</span>
+                </div>
+            </div>
+
+            <!-- Arena Central da Moeda -->
+            <div class="bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/80 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden text-center">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Seletor de Escolha -->
+                <div class="max-w-md mx-auto mb-8">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+                        1. Selecione a sua aposta:
+                    </label>
+                    <div class="grid grid-cols-2 gap-3 p-1.5 bg-slate-950/90 rounded-2xl border border-slate-800">
+                        <button type="button" id="btn-escolha-cara" onclick="selecionarEscolha('cara')" 
+                            class="py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 ring-2 ring-amber-400">
+                            <span id="ui-ico-btn-cara" class="text-lg">👑</span>
+                            <span id="ui-nome-btn-cara">Cara</span>
+                        </button>
+                        <button type="button" id="btn-escolha-coroa" onclick="selecionarEscolha('coroa')" 
+                            class="py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 text-slate-400 hover:text-white hover:bg-slate-900">
+                            <span id="ui-ico-btn-coroa" class="text-lg">⭐</span>
+                            <span id="ui-nome-btn-coroa">Coroa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Moeda 3D -->
+                <div class="py-6">
+                    <div class="coin-container">
+                        <div id="coin" class="coin coin-theme-dourado" onclick="lancarMoeda()">
+                            <!-- Cara -->
+                            <div class="coin-face coin-front">
+                                <div class="coin-rim"></div>
+                                <div id="coin-img-cara-box" class="hidden mb-1">
+                                    <img id="coin-img-cara" src="" alt="Cara" class="w-16 h-16 rounded-full object-cover border border-white/30">
+                                </div>
+                                <span id="coin-ico-cara" class="text-4xl mb-1 filter drop-shadow">👑</span>
+                                <span id="coin-txt-cara" class="font-display font-extrabold text-sm uppercase tracking-wider">CARA</span>
+                            </div>
+                            <!-- Coroa -->
+                            <div class="coin-face coin-back">
+                                <div class="coin-rim"></div>
+                                <div id="coin-img-coroa-box" class="hidden mb-1">
+                                    <img id="coin-img-coroa" src="" alt="Coroa" class="w-16 h-16 rounded-full object-cover border border-white/30">
+                                </div>
+                                <span id="coin-ico-coroa" class="text-4xl mb-1 filter drop-shadow">⭐</span>
+                                <span id="coin-txt-coroa" class="font-display font-extrabold text-sm uppercase tracking-wider">COROA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="coin-shadow" class="coin-shadow"></div>
+                </div>
+
+                <!-- Botão de Lançar -->
+                <div class="mt-6 flex flex-col items-center gap-3">
+                    <button id="btn-lancar" onclick="lancarMoeda()" 
+                        class="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-display font-black text-lg sm:text-xl tracking-tight shadow-xl shadow-amber-500/20 active:scale-95 transition-all duration-150">
+                        🎲 Lançar Moeda Agora
+                    </button>
+                    <span class="text-xs text-slate-500">Ou clique diretamente na moeda para rolar</span>
+                </div>
+
+                <!-- Painel de Resultado -->
+                <div id="resultado-painel" class="hidden mt-8 p-6 rounded-2xl border transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div id="resultado-icone" class="text-4xl p-3 rounded-2xl bg-slate-800/80">🪙</div>
+                            <div class="text-left">
+                                <div id="resultado-titulo" class="font-display font-extrabold text-xl sm:text-2xl"></div>
+                                <div id="resultado-detalhe" class="text-sm text-slate-300"></div>
+                            </div>
+                        </div>
+                        <div id="resultado-badge" class="px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide shadow-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Dashboard Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <div class="text-xs text-slate-400 mb-1">Total Jogos</div>
+                    <div id="stat-total" class="font-display font-black text-2xl text-white">0</div>
+                </div>
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <div class="text-xs text-slate-400 mb-1">Taxa de Vitória</div>
+                    <div id="stat-taxa" class="font-display font-black text-2xl text-amber-400">0%</div>
+                </div>
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <div class="text-xs text-slate-400 mb-1">Vitórias / Erros</div>
+                    <div class="font-display font-bold text-lg text-white">
+                        <span id="stat-vitorias" class="text-emerald-400">0</span> / 
+                        <span id="stat-derrotas" class="text-rose-400">0</span>
+                    </div>
+                </div>
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
+                    <div class="text-xs text-slate-400 mb-1">Sequência Atual</div>
+                    <div id="stat-streak" class="font-display font-black text-2xl text-indigo-400">🔥 0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+             SEÇÃO 2: PERSONALIZAR MOEDA
+             ========================================================== -->
+        <section id="view-personalizar" class="view-panel hidden max-w-4xl mx-auto space-y-8">
+            <div class="text-center space-y-2">
+                <h1 class="font-display font-black text-3xl sm:text-5xl tracking-tight bg-gradient-to-r from-amber-300 via-amber-100 to-amber-400 bg-clip-text text-transparent">
+                    Personalizar Moeda
+                </h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+                    Personalize nomes, ícones, temas visuais ou imagens próprias. Salvo em cookies e auditado.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Prévia 3D -->
+                <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 text-center sticky top-24 shadow-2xl">
+                    <h3 class="font-display font-bold text-lg text-slate-200 mb-2">Prévia em Tempo Real</h3>
+                    <p class="text-xs text-slate-400 mb-6">Clique na moeda para virar e conferir as faces</p>
+
+                    <div class="coin-container my-4">
+                        <div id="preview-coin" class="coin coin-theme-dourado" onclick="alternarPreviaFace()">
+                            <div class="coin-face coin-front">
+                                <div class="coin-rim"></div>
+                                <div id="preview-img-cara-box" class="hidden mb-1">
+                                    <img id="preview-img-cara" src="" alt="Cara" class="w-16 h-16 rounded-full object-cover border border-white/40">
+                                </div>
+                                <span id="preview-ico-cara" class="text-4xl mb-1 filter drop-shadow">👑</span>
+                                <span id="preview-txt-cara" class="font-display font-extrabold text-sm uppercase tracking-wider">CARA</span>
+                            </div>
+                            <div class="coin-face coin-back">
+                                <div class="coin-rim"></div>
+                                <div id="preview-img-coroa-box" class="hidden mb-1">
+                                    <img id="preview-img-coroa" src="" alt="Coroa" class="w-16 h-16 rounded-full object-cover border border-white/40">
+                                </div>
+                                <span id="preview-ico-coroa" class="text-4xl mb-1 filter drop-shadow">⭐</span>
+                                <span id="preview-txt-coroa" class="font-display font-extrabold text-sm uppercase tracking-wider">COROA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="coin-shadow mb-6"></div>
+
+                    <div class="flex justify-center gap-2">
+                        <button type="button" onclick="virarPreviaPara(0)" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                            Ver Cara
+                        </button>
+                        <button type="button" onclick="virarPreviaPara(180)" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+                            Ver Coroa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Formulário -->
+                <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                    <form id="form-personalizar" onsubmit="salvarPersonalizacao(event)" class="space-y-6">
+                        <!-- Temas de Cor -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">1. Tema Metálico:</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="tema-picker-container">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Config Cara -->
+                        <div class="border-t border-slate-800 pt-5 space-y-4">
+                            <div class="flex items-center gap-2 text-sm font-bold text-amber-400">
+                                <span>👑</span>
+                                <span>Face: CARA</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Nome:</label>
+                                    <input type="text" id="input-nome-cara" maxlength="25" oninput="atualizarPreview()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Emoji/Ícone:</label>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="input-ico-cara" maxlength="4" oninput="atualizarPreview()" class="w-16 bg-slate-950 border border-slate-800 rounded-xl px-2 py-2.5 text-center text-lg text-white">
+                                        <div class="flex-1 flex items-center gap-1.5 overflow-x-auto py-1">
+                                            <button type="button" onclick="setEmoji('cara', '👑')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">👑</button>
+                                            <button type="button" onclick="setEmoji('cara', '🦁')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">🦁</button>
+                                            <button type="button" onclick="setEmoji('cara', '⚡')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">⚡</button>
+                                            <button type="button" onclick="setEmoji('cara', '🦅')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">🦅</button>
+                                            <button type="button" onclick="setEmoji('cara', '☀️')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">☀️</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1.5">Imagem personalizada (upload):</label>
+                                <div class="flex items-center gap-3">
+                                    <input type="file" id="file-img-cara" accept="image/*" onchange="uploadImg(event, 'cara')" class="text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-slate-800 file:text-slate-200">
+                                    <button type="button" onclick="removerImg('cara')" class="text-xs text-rose-400 hover:underline">Remover</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Config Coroa -->
+                        <div class="border-t border-slate-800 pt-5 space-y-4">
+                            <div class="flex items-center gap-2 text-sm font-bold text-amber-400">
+                                <span>⭐</span>
+                                <span>Face: COROA</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Nome:</label>
+                                    <input type="text" id="input-nome-coroa" maxlength="25" oninput="atualizarPreview()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-400 mb-1.5">Emoji/Ícone:</label>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="input-ico-coroa" maxlength="4" oninput="atualizarPreview()" class="w-16 bg-slate-950 border border-slate-800 rounded-xl px-2 py-2.5 text-center text-lg text-white">
+                                        <div class="flex-1 flex items-center gap-1.5 overflow-x-auto py-1">
+                                            <button type="button" onclick="setEmoji('coroa', '⭐')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">⭐</button>
+                                            <button type="button" onclick="setEmoji('coroa', '🌙')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">🌙</button>
+                                            <button type="button" onclick="setEmoji('coroa', '💎')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">💎</button>
+                                            <button type="button" onclick="setEmoji('coroa', '🛡️')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">🛡️</button>
+                                            <button type="button" onclick="setEmoji('coroa', '🍀')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700">🍀</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1.5">Imagem personalizada (upload):</label>
+                                <div class="flex items-center gap-3">
+                                    <input type="file" id="file-img-coroa" accept="image/*" onchange="uploadImg(event, 'coroa')" class="text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:bg-slate-800 file:text-slate-200">
+                                    <button type="button" onclick="removerImg('coroa')" class="text-xs text-rose-400 hover:underline">Remover</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <button type="button" onclick="restaurarPadroesMoeda()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white bg-slate-800">
+                                Restaurar Padrões
+                            </button>
+                            <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-amber-500/20 active:scale-95 transition">
+                                💾 Salvar Personalização
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+             SEÇÃO 3: DASHBOARD DE USO
+             ========================================================== -->
+        <section id="view-dashboard" class="view-panel hidden max-w-6xl mx-auto space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div>
+                    <h1 class="font-display font-black text-3xl sm:text-4xl tracking-tight bg-gradient-to-r from-amber-300 via-amber-100 to-amber-400 bg-clip-text text-transparent">
+                        Dashboard de Uso
+                    </h1>
+                    <p class="text-slate-400 text-sm mt-1">Estatísticas analíticas e registros em tempo real.</p>
+                </div>
+                <button onclick="navegarPara('jogar')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm">
+                    🎲 Ir Jogar
+                </button>
+            </div>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+                    <div class="text-xs font-semibold uppercase text-slate-400 mb-1">Total de Rolagens</div>
+                    <div id="dash-total" class="font-display font-black text-3xl sm:text-4xl text-white">0</div>
+                    <div class="text-xs text-slate-500 mt-2">🪙 Salvo em cookies locais</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+                    <div class="text-xs font-semibold uppercase text-slate-400 mb-1">Taxa de Acertos</div>
+                    <div id="dash-taxa" class="font-display font-black text-3xl sm:text-4xl text-amber-400">0%</div>
+                    <div id="dash-acertos-sub" class="text-xs text-slate-500 mt-2">🎯 0 vitórias</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+                    <div class="text-xs font-semibold uppercase text-slate-400 mb-1">Maior Sequência</div>
+                    <div id="dash-streak" class="font-display font-black text-3xl sm:text-4xl text-emerald-400">🔥 0</div>
+                    <div id="dash-streak-sub" class="text-xs text-slate-500 mt-2">Atual: 0 seguidas</div>
+                </div>
+                <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+                    <div class="text-xs font-semibold uppercase text-slate-400 mb-1">Trocas / Anúncios</div>
+                    <div id="dash-trocas" class="font-display font-black text-3xl sm:text-4xl text-indigo-400">0 / 0</div>
+                    <div class="text-xs text-slate-500 mt-2">⚡ Regra 10s aplicada</div>
+                </div>
+            </div>
+
+            <!-- Gráficos Visuais -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Cara vs Coroa -->
+                <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
+                    <h3 class="font-display font-bold text-base text-slate-200 mb-4">Distribuição: Cara vs Coroa</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-300 mb-1.5">
+                                <span id="dash-label-cara">👑 Cara</span>
+                                <span id="dash-val-cara" class="font-mono text-amber-400 font-bold">0 (0%)</span>
+                            </div>
+                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                <div id="dash-bar-cara" class="bg-amber-400 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-300 mb-1.5">
+                                <span id="dash-label-coroa">⭐ Coroa</span>
+                                <span id="dash-val-coroa" class="font-mono text-indigo-400 font-bold">0 (0%)</span>
+                            </div>
+                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                <div id="dash-bar-coroa" class="bg-indigo-400 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vitórias vs Derrotas -->
+                <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
+                    <h3 class="font-display font-bold text-base text-slate-200 mb-4">Desempenho: Vitórias vs Derrotas</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-300 mb-1.5">
+                                <span class="text-emerald-400 font-semibold">🏆 Vitórias (Acertos)</span>
+                                <span id="dash-val-vitorias" class="font-mono text-emerald-400 font-bold">0 (0%)</span>
+                            </div>
+                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                <div id="dash-bar-vitorias" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-300 mb-1.5">
+                                <span class="text-rose-400 font-semibold">💥 Derrotas (Erros)</span>
+                                <span id="dash-val-derrotas" class="font-mono text-rose-400 font-bold">0 (0%)</span>
+                            </div>
+                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                <div id="dash-bar-derrotas" class="bg-rose-500 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+             SEÇÃO 4: HISTÓRICO & AUDITORIA
+             ========================================================== -->
+        <section id="view-historico" class="view-panel hidden max-w-6xl mx-auto space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                <div>
+                    <h1 class="font-display font-black text-3xl sm:text-4xl tracking-tight bg-gradient-to-r from-amber-300 via-amber-100 to-amber-400 bg-clip-text text-transparent">
+                        Histórico & Auditoria
+                    </h1>
+                    <p class="text-slate-400 text-sm mt-1">Registros preservados para auditorias futuras de conformidade.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="exportarJsonAuditoria()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition">
+                        📥 Exportar JSON
+                    </button>
+                    <button onclick="limparHistoricoCompleto()" class="px-4 py-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-800/60 text-rose-300 font-semibold text-xs transition">
+                        🗑️ Limpar Histórico
+                    </button>
+                </div>
+            </div>
+
+            <!-- Abas internas -->
+            <div class="flex border-b border-slate-800 gap-2">
+                <button id="btn-tab-h-jogos" onclick="alternarAbaHistorico('jogos')" class="px-5 py-3 text-sm font-bold border-b-2 border-amber-400 text-amber-400">
+                    🎲 Histórico de Jogos
+                </button>
+                <button id="btn-tab-h-auditoria" onclick="alternarAbaHistorico('auditoria')" class="px-5 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+                    🛡️ Logs de Auditoria <span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30">CORE</span>
+                </button>
+            </div>
+
+            <!-- Painel Histórico de Jogos -->
+            <div id="subpainel-jogos" class="space-y-4">
+                <div class="flex items-center gap-2 bg-slate-900/60 p-3 rounded-2xl border border-slate-800">
+                    <span class="text-xs text-slate-400">Filtro:</span>
+                    <button onclick="filtrarJogosTabela('todos')" class="f-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-slate-950">Todos</button>
+                    <button onclick="filtrarJogosTabela('vitorias')" class="f-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">Vitórias</button>
+                    <button onclick="filtrarJogosTabela('derrotas')" class="f-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300">Derrotas</button>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs uppercase bg-slate-950/70 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="px-4 py-3 rounded-l-xl">ID</th>
+                                <th class="px-4 py-3">Data e Hora</th>
+                                <th class="px-4 py-3">Sua Escolha</th>
+                                <th class="px-4 py-3">Resultado Moeda</th>
+                                <th class="px-4 py-3 text-right rounded-r-xl">Status Verificação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-jogos-corpo" class="divide-y divide-slate-800/60">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Painel Logs de Auditoria -->
+            <div id="subpainel-auditoria" class="hidden space-y-4">
+                <div class="bg-amber-950/40 border border-amber-600/40 rounded-2xl p-4 flex items-start gap-3 text-xs text-amber-200">
+                    <span class="text-xl shrink-0">🛡️</span>
+                    <div>
+                        <strong class="font-bold text-amber-300 text-sm">Registro de Auditoria de Conformidade (CORE)</strong>
+                        <p class="mt-0.5 text-amber-200/80">
+                            O sistema mantém sempre os logs de qualquer alteração feita por qualquer usuário para auditorias futuras.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs uppercase bg-slate-950/70 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="px-4 py-3 rounded-l-xl">Data / Hora</th>
+                                <th class="px-4 py-3">Tipo de Ação</th>
+                                <th class="px-4 py-3">Descrição da Alteração</th>
+                                <th class="px-4 py-3 text-right rounded-r-xl">Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-auditoria-corpo" class="divide-y divide-slate-800/60">
+                            <!-- Inserido dinamicamente via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="border-t border-slate-800/80 bg-slate-900/40 py-6 mt-12 text-slate-400 text-xs text-center">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span>🪙</span>
+                <span class="font-semibold text-slate-300">Cara e Coroa</span>
+                <span>— Sistema Oficial com Auditoria e Cookies</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span>Tailwind CSS • Cookies Nativos • Web Audio API</span>
+                <a href="https://github.com/felipejhfreitas-cyber/Cara-e-coroa-.git" target="_blank" rel="noopener" class="hover:text-amber-400 transition underline">
+                    Repositório GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contêiner de Toasts -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- Modal de Anúncio de 10 Segundos -->
+    <div id="ad-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="relative bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/30 text-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    Regra CORE: Anúncio Obrigatório
+                </span>
+                <div class="text-xs text-slate-400 font-mono">Troca de Escolha</div>
+            </div>
+            <div class="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 rounded-2xl p-6 text-center shadow-inner relative overflow-hidden mb-6 border border-white/10">
+                <div class="text-xs uppercase tracking-widest text-indigo-200 font-bold mb-1">Patrocinador Oficial</div>
+                <h4 class="text-2xl font-black tracking-tight text-white mb-2">💎 SuperCrypto Prime</h4>
+                <p class="text-sm text-indigo-100 max-w-xs mx-auto mb-4">
+                    Auditoria garantida, apostas justas e bônus exclusivo de 100% no primeiro depósito.
+                </p>
+                <div class="inline-block px-4 py-2 bg-white text-indigo-950 font-bold rounded-xl text-xs shadow-lg uppercase tracking-wider">
+                    Bônus Ativado
+                </div>
+            </div>
+            <div class="bg-slate-800/60 rounded-2xl p-4 border border-slate-700/60 flex items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center font-black text-amber-300 text-xl font-mono shadow-inner" id="ad-countdown-number">
+                        10
+                    </div>
+                    <div>
+                        <div class="text-sm font-semibold text-white">Temporizador de Anúncio</div>
+                        <div class="text-xs text-slate-400">Obrigatório 10 segundos para prosseguir</div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-amber-400 font-medium">Bloqueado</span>
+                </div>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-6">
+                <div id="ad-progress-bar" class="bg-gradient-to-r from-amber-500 to-amber-300 h-full transition-all duration-1000 ease-linear" style="width: 100%;"></div>
+            </div>
+            <div class="flex justify-center">
+                <button id="ad-close-btn" disabled class="w-full py-3.5 px-6 rounded-xl font-bold text-sm bg-slate-800 text-slate-500 cursor-not-allowed">
+                    Aguarde 10s...
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts da Aplicação -->
+    <script src="assets/js/app.js"></script>
+    <script>
+        // ==========================================================
+        // Estado e Controle Local (Salvo em Cookies)
+        // Regra: "os registros devem ser feitos todos salvos na maquina local recuperados por cookies"
+        // ==========================================================
+
+        const TEMAS_DISPONIVEIS = {
+            'dourado': ['Dourado Real', 'from-amber-400 to-yellow-600'],
+            'prateado': ['Prata Clássica', 'from-slate-200 to-slate-400'],
+            'bronze': ['Bronze Antigo', 'from-amber-600 to-orange-800'],
+            'cyberpunk': ['Cyber Neon', 'from-cyan-400 to-indigo-600'],
+            'rubi': ['Rubi Luxo', 'from-rose-500 to-red-800'],
+            'esmeralda': ['Esmeralda', 'from-emerald-400 to-teal-800'],
+            'dark': ['Dark Ônix', 'from-slate-700 to-slate-950']
+        };
+
+        let moedaConfig = CookieHelper.get('cc_personalizacao', {
+            nome_cara: 'Cara',
+            nome_coroa: 'Coroa',
+            tema_cor: 'dourado',
+            icone_cara: '👑',
+            icone_coroa: '⭐',
+            imagem_cara: '',
+            imagem_coroa: ''
+        });
+
+        let escolhaAtual = 'cara';
+        let trocasData = CookieHelper.get('cc_trocas_escolha', { total_trocas: 0, ultima_escolha: 'cara' });
+        let totalTrocas = trocasData.total_trocas || 0;
+        let isFlipping = false;
+        let currentRotation = 0;
+        let currentPreviewRotation = 0;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarTemaPicker();
+            carregarConfigFormulario();
+            aplicarConfigVisualMoeda();
+            atualizarContadorTrocasUI();
+            atualizarMiniEstatisticas();
+            renderizarDashboard();
+            renderizarTabelas();
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        });
+
+        // Navegação entre Views (MobileFirst SPA)
+        function navegarPara(viewId) {
+            AppAudio.playClick();
+            document.querySelectorAll('.view-panel').forEach(v => v.classList.add('hidden'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(b => {
+                b.className = 'nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition text-slate-300 hover:text-white hover:bg-slate-800/60';
+            });
+            const activeBtn = document.getElementById(`nav-btn-${viewId}`);
+            if (activeBtn) {
+                activeBtn.className = 'nav-item px-3.5 py-2 rounded-xl text-sm font-medium transition bg-amber-500/15 text-amber-400 border border-amber-500/30';
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            if (viewId === 'dashboard') renderizarDashboard();
+            if (viewId === 'historico') renderizarTabelas();
+        }
+
+        // ==========================================================
+        // Lógica de Troca de Escolha e Anúncio de 10s
+        // Regra CORE: "a cada duas troca de escolha um modal de anuncio de 10 segundos"
+        // ==========================================================
+        function selecionarEscolha(novaEscolha) {
+            if (isFlipping) return;
+            AppAudio.playClick();
+
+            if (novaEscolha === escolhaAtual) return;
+
+            const escolhaAnterior = escolhaAtual;
+            escolhaAtual = novaEscolha;
+            totalTrocas++;
+
+            // Atualiza botões
+            atualizarBotoesEscolha();
+
+            // Salva em cookie
+            trocasData = { total_trocas: totalTrocas, ultima_escolha: escolhaAtual };
+            CookieHelper.set('cc_trocas_escolha', trocasData);
+            atualizarContadorTrocasUI();
+
+            // Regra do CORE: a cada 2 trocas -> anúncio 10s
+            const dispararAnuncio = (totalTrocas % 2 === 0);
+
+            // Registra log de auditoria
+            registrarAuditoriaLocal(
+                'TROCA_ESCOLHA',
+                `Usuário trocou de '${escolhaAnterior}' para '${escolhaAtual}'. Total de trocas: ${totalTrocas}.` + (dispararAnuncio ? ' [Anúncio 10s Ativado]' : ''),
+                { anterior: escolhaAnterior },
+                { nova: escolhaAtual, total_trocas: totalTrocas, anuncio: dispararAnuncio }
+            );
+
+            if (dispararAnuncio) {
+                AppToast.warning('Regra Ativada: Anúncio obrigatório de 10 segundos!');
+                AppAdModal.start(() => {
+                    AppToast.success(`Anúncio finalizado! Escolha ativa: ${escolhaAtual.toUpperCase()}`);
+                });
+            } else {
+                AppToast.info(`Escolha alterada para: ${escolhaAtual.toUpperCase()}`);
+            }
+        }
+
+        function atualizarBotoesEscolha() {
+            const btnCara = document.getElementById('btn-escolha-cara');
+            const btnCoroa = document.getElementById('btn-escolha-coroa');
+            const ativa = 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 ring-2 ring-amber-400';
+            const inativa = 'text-slate-400 hover:text-white hover:bg-slate-900';
+
+            if (escolhaAtual === 'cara') {
+                btnCara.className = `py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 ${ativa}`;
+                btnCoroa.className = `py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 ${inativa}`;
+            } else {
+                btnCoroa.className = `py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 ${ativa}`;
+                btnCara.className = `py-3 px-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all duration-200 ${inativa}`;
+            }
+        }
+
+        function atualizarContadorTrocasUI() {
+            document.getElementById('badge-total-trocas').innerText = totalTrocas;
+            document.getElementById('badge-proximo-anuncio').innerText = (2 - (totalTrocas % 2));
+        }
+
+        // ==========================================================
+        // Rolagem da Moeda 3D e Verificação
+        // Regra CORE: "verificar se a escolha equivale ao resultado"
+        // ==========================================================
+        function lancarMoeda() {
+            if (isFlipping) return;
+            if (AppAdModal.isOpen) {
+                AppToast.warning('Aguarde o término do anúncio de 10 segundos!');
+                return;
+            }
+
+            isFlipping = true;
+            const coin = document.getElementById('coin');
+            const coinShadow = document.getElementById('coin-shadow');
+            const btnLancar = document.getElementById('btn-lancar');
+            const painel = document.getElementById('resultado-painel');
+
+            btnLancar.disabled = true;
+            btnLancar.classList.add('opacity-50', 'cursor-not-allowed');
+            painel.classList.add('hidden');
+
+            AppAudio.playCoinFlip();
+            coinShadow.classList.add('animate-pulse');
+
+            // Sorteio
+            const resultadoSorteado = Math.random() < 0.5 ? 'cara' : 'coroa';
+            const acertou = (escolhaAtual === resultadoSorteado);
+
+            // Rotação física 3D
+            const voltasExtras = 5 * 360;
+            const anguloDestino = (resultadoSorteado === 'cara') ? 0 : 180;
+            currentRotation = currentRotation + voltasExtras + ((anguloDestino - (currentRotation % 360) + 360) % 360);
+            coin.style.transform = `rotateY(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                isFlipping = false;
+                btnLancar.disabled = false;
+                btnLancar.classList.remove('opacity-50', 'cursor-not-allowed');
+                coinShadow.classList.remove('animate-pulse');
+                AppAudio.playCoinLand();
+
+                // Salva jogo no histórico local por Cookies
+                const novoJogo = {
+                    id: Date.now(),
+                    escolha: escolhaAtual,
+                    resultado: resultadoSorteado,
+                    acertou: acertou ? 1 : 0,
+                    criado_em: new Date().toLocaleString('pt-BR')
+                };
+
+                let historico = CookieHelper.get('cc_historico_jogos', []);
+                historico.unshift(novoJogo);
+                if (historico.length > 100) historico = historico.slice(0, 100);
+                CookieHelper.set('cc_historico_jogos', historico);
+
+                // Auditoria da rolagem
+                registrarAuditoriaLocal(
+                    'JOGO_REALIZADO',
+                    acertou ? `Vitória: Escolheu ${escolhaAtual} e caiu ${resultadoSorteado}.` : `Derrota: Escolheu ${escolhaAtual} e caiu ${resultadoSorteado}.`,
+                    null,
+                    novoJogo
+                );
+
+                // Exibe resultado com feedback visual e sonoro
+                exibirResultadoUI(novoJogo);
+                atualizarMiniEstatisticas();
+
+            }, 850);
+        }
+
+        function exibirResultadoUI(jogo) {
+            const painel = document.getElementById('resultado-painel');
+            const titulo = document.getElementById('resultado-titulo');
+            const detalhe = document.getElementById('resultado-detalhe');
+            const icone = document.getElementById('resultado-icone');
+            const badge = document.getElementById('resultado-badge');
+
+            painel.classList.remove('hidden', 'bg-emerald-950/40', 'border-emerald-600/40', 'bg-rose-950/40', 'border-rose-600/40');
+
+            const resNome = (jogo.resultado === 'cara') ? moedaConfig.nome_cara : moedaConfig.nome_coroa;
+            const escNome = (jogo.escolha === 'cara') ? moedaConfig.nome_cara : moedaConfig.nome_coroa;
+
+            if (jogo.acertou) {
+                AppAudio.playWin();
+                painel.classList.add('bg-emerald-950/40', 'border-emerald-600/40');
+                icone.innerText = '🏆';
+                titulo.className = 'font-display font-extrabold text-xl sm:text-2xl text-emerald-300';
+                titulo.innerText = 'Você Acertou!';
+                detalhe.innerText = `Sua escolha (${escNome}) equivale ao resultado sorteado (${resNome})!`;
+                badge.className = 'px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide shadow-lg bg-emerald-500 text-slate-950';
+                badge.innerText = 'VITÓRIA';
+                AppToast.success('Parabéns, vitória confirmada!');
+            } else {
+                AppAudio.playLose();
+                painel.classList.add('bg-rose-950/40', 'border-rose-600/40');
+                icone.innerText = '💥';
+                titulo.className = 'font-display font-extrabold text-xl sm:text-2xl text-rose-300';
+                titulo.innerText = 'Você Errou!';
+                detalhe.innerText = `Você escolheu ${escNome}, mas a moeda caiu em ${resNome}.`;
+                badge.className = 'px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide shadow-lg bg-rose-600 text-white';
+                badge.innerText = 'DERROTA';
+                AppToast.error('Não foi dessa vez! Tente novamente.');
+            }
+        }
+
+        // ==========================================================
+        // Personalização da Moeda
+        // ==========================================================
+        function renderizarTemaPicker() {
+            const container = document.getElementById('tema-picker-container');
+            container.innerHTML = '';
+            for (const [key, [label, grad]] of Object.entries(TEMAS_DISPONIVEIS)) {
+                const ativo = (moedaConfig.tema_cor === key);
+                const el = document.createElement('label');
+                el.className = `relative flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer transition ${ativo ? 'border-amber-400 bg-amber-500/10 text-white' : 'border-slate-800 bg-slate-950/60 text-slate-300 hover:border-slate-700'}`;
+                el.innerHTML = `
+                    <input type="radio" name="tema_cor" value="${key}" ${ativo ? 'checked' : ''} onchange="alterarTemaMoeda('${key}')" class="sr-only">
+                    <span class="w-4 h-4 rounded-full bg-gradient-to-tr ${grad} shrink-0 shadow"></span>
+                    <span class="text-xs font-semibold">${label}</span>
+                `;
+                container.appendChild(el);
+            }
+        }
+
+        function alterarTemaMoeda(tema) {
+            moedaConfig.tema_cor = tema;
+            renderizarTemaPicker();
+            document.getElementById('preview-coin').className = `coin coin-theme-${tema}`;
+            AppAudio.playClick();
+        }
+
+        function carregarConfigFormulario() {
+            document.getElementById('input-nome-cara').value = moedaConfig.nome_cara || 'Cara';
+            document.getElementById('input-nome-coroa').value = moedaConfig.nome_coroa || 'Coroa';
+            document.getElementById('input-ico-cara').value = moedaConfig.icone_cara || '👑';
+            document.getElementById('input-ico-coroa').value = moedaConfig.icone_coroa || '⭐';
+            atualizarPreview();
+        }
+
+        function atualizarPreview() {
+            const nomeC = document.getElementById('input-nome-cara').value || 'Cara';
+            const nomeCr = document.getElementById('input-nome-coroa').value || 'Coroa';
+            const icoC = document.getElementById('input-ico-cara').value || '👑';
+            const icoCr = document.getElementById('input-ico-coroa').value || '⭐';
+
+            document.getElementById('preview-txt-cara').innerText = nomeC.toUpperCase();
+            document.getElementById('preview-txt-coroa').innerText = nomeCr.toUpperCase();
+            document.getElementById('preview-ico-cara').innerText = icoC;
+            document.getElementById('preview-ico-coroa').innerText = icoCr;
+        }
+
+        function alternarPreviaFace() {
+            currentPreviewRotation += 180;
+            document.getElementById('preview-coin').style.transform = `rotateY(${currentPreviewRotation}deg)`;
+            AppAudio.playClick();
+        }
+
+        function virarPreviaPara(deg) {
+            currentPreviewRotation = deg;
+            document.getElementById('preview-coin').style.transform = `rotateY(${currentPreviewRotation}deg)`;
+            AppAudio.playClick();
+        }
+
+        function setEmoji(face, emoji) {
+            if (face === 'cara') {
+                document.getElementById('input-ico-cara').value = emoji;
+            } else {
+                document.getElementById('input-ico-coroa').value = emoji;
+            }
+            atualizarPreview();
+            AppAudio.playClick();
+        }
+
+        function uploadImg(event, face) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.size > 500 * 1024) {
+                AppModal.alert('Tamanho Excedido', 'Selecione uma imagem de até 500 KB para persistência correta em cookies.', '⚠️');
+                event.target.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const b64 = e.target.result;
+                if (face === 'cara') {
+                    moedaConfig.imagem_cara = b64;
+                    document.getElementById('preview-img-cara').src = b64;
+                    document.getElementById('preview-img-cara-box').classList.remove('hidden');
+                    document.getElementById('preview-ico-cara').classList.add('hidden');
+                } else {
+                    moedaConfig.imagem_coroa = b64;
+                    document.getElementById('preview-img-coroa').src = b64;
+                    document.getElementById('preview-img-coroa-box').classList.remove('hidden');
+                    document.getElementById('preview-ico-coroa').classList.add('hidden');
+                }
+                AppToast.success(`Imagem de ${face} carregada!`);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removerImg(face) {
+            if (face === 'cara') {
+                moedaConfig.imagem_cara = '';
+                document.getElementById('file-img-cara').value = '';
+                document.getElementById('preview-img-cara-box').classList.add('hidden');
+                document.getElementById('preview-ico-cara').classList.remove('hidden');
+            } else {
+                moedaConfig.imagem_coroa = '';
+                document.getElementById('file-img-coroa').value = '';
+                document.getElementById('preview-img-coroa-box').classList.add('hidden');
+                document.getElementById('preview-ico-coroa').classList.remove('hidden');
+            }
+            AppToast.info(`Imagem de ${face} removida.`);
+        }
+
+        function salvarPersonalizacao(e) {
+            e.preventDefault();
+            const configAnterior = { ...moedaConfig };
+
+            moedaConfig.nome_cara = document.getElementById('input-nome-cara').value.trim() || 'Cara';
+            moedaConfig.nome_coroa = document.getElementById('input-nome-coroa').value.trim() || 'Coroa';
+            moedaConfig.icone_cara = document.getElementById('input-ico-cara').value.trim() || '👑';
+            moedaConfig.icone_coroa = document.getElementById('input-ico-coroa').value.trim() || '⭐';
+
+            // Salva no cookie local
+            CookieHelper.set('cc_personalizacao', moedaConfig);
+
+            // Regra CORE: Mantém sempre logs de auditoria
+            registrarAuditoriaLocal(
+                'MOEDA_PERSONALIZADA',
+                `Moeda personalizada salva: ${moedaConfig.nome_cara} / ${moedaConfig.nome_coroa} (Tema: ${moedaConfig.tema_cor})`,
+                configAnterior,
+                moedaConfig
+            );
+
+            aplicarConfigVisualMoeda();
+            AppToast.success('Personalização da moeda salva nos Cookies com sucesso!');
+            AppAudio.playWin();
+        }
+
+        async function restaurarPadroesMoeda() {
+            const ok = await AppModal.confirm(
+                'Restaurar Padrões',
+                'Deseja retornar às configurações de moeda de fábrica?',
+                'Sim, Restaurar',
+                'Cancelar'
+            );
+            if (!ok) return;
+
+            moedaConfig = {
+                nome_cara: 'Cara',
+                nome_coroa: 'Coroa',
+                tema_cor: 'dourado',
+                icone_cara: '👑',
+                icone_coroa: '⭐',
+                imagem_cara: '',
+                imagem_coroa: ''
+            };
+            CookieHelper.set('cc_personalizacao', moedaConfig);
+            carregarConfigFormulario();
+            renderizarTemaPicker();
+            aplicarConfigVisualMoeda();
+            AppToast.info('Configurações padrão restauradas.');
+        }
+
+        function aplicarConfigVisualMoeda() {
+            const coin = document.getElementById('coin');
+            coin.className = `coin coin-theme-${moedaConfig.tema_cor}`;
+
+            document.getElementById('coin-txt-cara').innerText = moedaConfig.nome_cara.toUpperCase();
+            document.getElementById('coin-txt-coroa').innerText = moedaConfig.nome_coroa.toUpperCase();
+            document.getElementById('coin-ico-cara').innerText = moedaConfig.icone_cara;
+            document.getElementById('coin-ico-coroa').innerText = moedaConfig.icone_coroa;
+
+            document.getElementById('ui-nome-btn-cara').innerText = moedaConfig.nome_cara;
+            document.getElementById('ui-nome-btn-coroa').innerText = moedaConfig.nome_coroa;
+            document.getElementById('ui-ico-btn-cara').innerText = moedaConfig.icone_cara;
+            document.getElementById('ui-ico-btn-coroa').innerText = moedaConfig.icone_coroa;
+
+            // Imagens
+            if (moedaConfig.imagem_cara) {
+                document.getElementById('coin-img-cara').src = moedaConfig.imagem_cara;
+                document.getElementById('coin-img-cara-box').classList.remove('hidden');
+                document.getElementById('coin-ico-cara').classList.add('hidden');
+            } else {
+                document.getElementById('coin-img-cara-box').classList.add('hidden');
+                document.getElementById('coin-ico-cara').classList.remove('hidden');
+            }
+
+            if (moedaConfig.imagem_coroa) {
+                document.getElementById('coin-img-coroa').src = moedaConfig.imagem_coroa;
+                document.getElementById('coin-img-coroa-box').classList.remove('hidden');
+                document.getElementById('coin-ico-coroa').classList.add('hidden');
+            } else {
+                document.getElementById('coin-img-coroa-box').classList.add('hidden');
+                document.getElementById('coin-ico-coroa').classList.remove('hidden');
+            }
+        }
+
+        // ==========================================================
+        // Métricas e Estatísticas
+        // ==========================================================
+        function calcularMetricas() {
+            const jogos = CookieHelper.get('cc_historico_jogos', []);
+            const total = jogos.length;
+            let vitorias = 0, derrotas = 0, caras = 0, coroas = 0, streakAtual = 0, maiorStreak = 0, tempStreak = 0;
+
+            const cronologicos = [...jogos].reverse();
+            cronologicos.forEach(j => {
+                if (j.acertou) {
+                    vitorias++;
+                    tempStreak++;
+                    if (tempStreak > maiorStreak) maiorStreak = tempStreak;
+                } else {
+                    derrotas++;
+                    tempStreak = 0;
+                }
+                if (j.resultado === 'cara') caras++;
+                else if (j.resultado === 'coroa') coroas++;
+            });
+
+            for (const j of jogos) {
+                if (j.acertou) streakAtual++;
+                else break;
+            }
+
+            const taxa = total > 0 ? ((vitorias / total) * 100).toFixed(1) : 0;
+            const percCara = total > 0 ? ((caras / total) * 100).toFixed(1) : 0;
+            const percCoroa = total > 0 ? ((coroas / total) * 100).toFixed(1) : 0;
+
+            return { total, vitorias, derrotas, taxa, caras, coroas, percCara, percCoroa, streakAtual, maiorStreak };
+        }
+
+        function atualizarMiniEstatisticas() {
+            const m = calcularMetricas();
+            document.getElementById('stat-total').innerText = m.total;
+            document.getElementById('stat-taxa').innerText = `${m.taxa}%`;
+            document.getElementById('stat-vitorias').innerText = m.vitorias;
+            document.getElementById('stat-derrotas').innerText = m.derrotas;
+            document.getElementById('stat-streak').innerText = `🔥 ${m.streakAtual}`;
+        }
+
+        function renderizarDashboard() {
+            const m = calcularMetricas();
+            const adsDisparados = Math.floor(totalTrocas / 2);
+
+            document.getElementById('dash-total').innerText = m.total;
+            document.getElementById('dash-taxa').innerText = `${m.taxa}%`;
+            document.getElementById('dash-acertos-sub').innerText = `🎯 ${m.vitorias} acertos de ${m.total}`;
+            document.getElementById('dash-streak').innerText = `🔥 ${m.maiorStreak}`;
+            document.getElementById('dash-streak-sub').innerText = `Atual: ${m.streakAtual} seguidas`;
+            document.getElementById('dash-trocas').innerText = `${totalTrocas} / ${adsDisparados} ads`;
+
+            document.getElementById('dash-label-cara').innerText = `${moedaConfig.icone_cara} ${moedaConfig.nome_cara}`;
+            document.getElementById('dash-val-cara').innerText = `${m.caras} (${m.percCara}%)`;
+            document.getElementById('dash-bar-cara').style.width = `${m.percCara}%`;
+
+            document.getElementById('dash-label-coroa').innerText = `${moedaConfig.icone_coroa} ${moedaConfig.nome_coroa}`;
+            document.getElementById('dash-val-coroa').innerText = `${m.coroas} (${m.percCoroa}%)`;
+            document.getElementById('dash-bar-coroa').style.width = `${m.percCoroa}%`;
+
+            const taxaDerrotas = m.total > 0 ? (100 - m.taxa).toFixed(1) : 0;
+            document.getElementById('dash-val-vitorias').innerText = `${m.vitorias} (${m.taxa}%)`;
+            document.getElementById('dash-bar-vitorias').style.width = `${m.taxa}%`;
+            document.getElementById('dash-val-derrotas').innerText = `${m.derrotas} (${taxaDerrotas}%)`;
+            document.getElementById('dash-bar-derrotas').style.width = `${taxaDerrotas}%`;
+        }
+
+        // ==========================================================
+        // Histórico e Auditoria Local por Cookies
+        // Regra CORE: Mantém logs de qualquer alteração para auditorias futuras
+        // ==========================================================
+        function registrarAuditoriaLocal(tipo, descricao, anteriores = null, novos = null) {
+            let logs = CookieHelper.get('cc_logs_auditoria', []);
+            const novoLog = {
+                id: 'log_' + Date.now(),
+                tipo_acao: tipo,
+                descricao: descricao,
+                dados_anteriores: anteriores,
+                dados_novos: novos,
+                criado_em: new Date().toLocaleString('pt-BR')
+            };
+            logs.unshift(novoLog);
+            if (logs.length > 50) logs = logs.slice(0, 50);
+            CookieHelper.set('cc_logs_auditoria', logs);
+        }
+
+        function alternarAbaHistorico(subAba) {
+            AppAudio.playClick();
+            const pJogos = document.getElementById('subpainel-jogos');
+            const pAuditoria = document.getElementById('subpainel-auditoria');
+            const btnJ = document.getElementById('btn-tab-h-jogos');
+            const btnA = document.getElementById('btn-tab-h-auditoria');
+
+            if (subAba === 'jogos') {
+                pJogos.classList.remove('hidden');
+                pAuditoria.classList.add('hidden');
+                btnJ.className = 'px-5 py-3 text-sm font-bold border-b-2 border-amber-400 text-amber-400';
+                btnA.className = 'px-5 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200';
+            } else {
+                pAuditoria.classList.remove('hidden');
+                pJogos.classList.add('hidden');
+                btnA.className = 'px-5 py-3 text-sm font-bold border-b-2 border-amber-400 text-amber-400';
+                btnJ.className = 'px-5 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200';
+            }
+        }
+
+        function renderizarTabelas() {
+            const jogos = CookieHelper.get('cc_historico_jogos', []);
+            const logs = CookieHelper.get('cc_logs_auditoria', []);
+
+            // Tabela de Jogos
+            const corpoJogos = document.getElementById('tabela-jogos-corpo');
+            if (jogos.length === 0) {
+                corpoJogos.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">Nenhum lançamento gravado em cookies.</td></tr>`;
+            } else {
+                corpoJogos.innerHTML = jogos.map(j => {
+                    const escNome = (j.escolha === 'cara') ? moedaConfig.nome_cara : moedaConfig.nome_coroa;
+                    const escIco = (j.escolha === 'cara') ? moedaConfig.icone_cara : moedaConfig.icone_coroa;
+                    const resNome = (j.resultado === 'cara') ? moedaConfig.nome_cara : moedaConfig.nome_coroa;
+                    const resIco = (j.resultado === 'cara') ? moedaConfig.icone_cara : moedaConfig.icone_coroa;
+                    const classeFiltro = j.acertou ? 'jogo-vitoria' : 'jogo-derrota';
+                    return `
+                        <tr class="linha-j ${classeFiltro} hover:bg-slate-800/40 transition">
+                            <td class="px-4 py-3 text-xs text-slate-500 font-mono">#${j.id}</td>
+                            <td class="px-4 py-3 text-xs text-slate-400 font-mono">${j.criado_em}</td>
+                            <td class="px-4 py-3">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 text-xs font-semibold">
+                                    <span>${escIco}</span><span>${escNome}</span>
+                                </span>
+                            </td>
+                            <td class="px-4 py-3">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800 text-xs font-semibold">
+                                    <span>${resIco}</span><span>${resNome}</span>
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-right">
+                                ${j.acertou ? 
+                                    `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-600/40">✓ Acertou</span>` :
+                                    `<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-rose-950 text-rose-300 border border-rose-600/40">✕ Errou</span>`
+                                }
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Tabela de Auditoria
+            const corpoAuditoria = document.getElementById('tabela-auditoria-corpo');
+            if (logs.length === 0) {
+                corpoAuditoria.innerHTML = `<tr><td colspan="4" class="px-4 py-8 text-center text-slate-500">Nenhum log gravado ainda.</td></tr>`;
+            } else {
+                corpoAuditoria.innerHTML = logs.map(l => {
+                    let badge = 'bg-slate-800 text-slate-300';
+                    if (l.tipo_acao === 'JOGO_REALIZADO') badge = 'bg-emerald-950 text-emerald-300 border border-emerald-700/50';
+                    else if (l.tipo_acao === 'TROCA_ESCOLHA') badge = 'bg-amber-950 text-amber-300 border border-amber-700/50';
+                    else if (l.tipo_acao === 'MOEDA_PERSONALIZADA') badge = 'bg-purple-950 text-purple-300 border border-purple-700/50';
+                    else if (l.tipo_acao === 'HISTORICO_LIMPO') badge = 'bg-rose-950 text-rose-300 border border-rose-700/50';
+                    return `
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="px-4 py-3 text-xs text-slate-400 font-mono">${l.criado_em}</td>
+                            <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold ${badge}">${l.tipo_acao}</span></td>
+                            <td class="px-4 py-3 text-xs text-slate-200">${l.descricao}</td>
+                            <td class="px-4 py-3 text-right">
+                                <button onclick="inspecionarLog('${l.id}')" class="px-3 py-1 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-amber-400">Ver JSON</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function filtrarJogosTabela(tipo) {
+            AppAudio.playClick();
+            const linhas = document.querySelectorAll('.linha-j');
+            document.querySelectorAll('.f-btn').forEach(b => b.className = 'f-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300');
+            event.target.className = 'f-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-slate-950';
+
+            linhas.forEach(l => {
+                if (tipo === 'todos') l.classList.remove('hidden');
+                else if (tipo === 'vitorias') l.classList.toggle('hidden', !l.classList.contains('jogo-vitoria'));
+                else if (tipo === 'derrotas') l.classList.toggle('hidden', !l.classList.contains('jogo-derrota'));
+            });
+        }
+
+        async function limparHistoricoCompleto() {
+            const ok = await AppModal.confirm(
+                'Confirmar Limpeza',
+                'Tem certeza que deseja apagar todo o histórico de rolagens? Um registro de auditoria permanente será gerado.',
+                'Sim, Limpar',
+                'Cancelar'
+            );
+            if (!ok) return;
+
+            const total = CookieHelper.get('cc_historico_jogos', []).length;
+            CookieHelper.set('cc_historico_jogos', []);
+
+            registrarAuditoriaLocal(
+                'HISTORICO_LIMPO',
+                `Limpeza completa do histórico realizada pelo usuário (${total} registros apagados).`,
+                { total_apagado: total },
+                { status: 'limpo' }
+            );
+
+            renderizarTabelas();
+            atualizarMiniEstatisticas();
+            renderizarDashboard();
+            AppToast.success(`Histórico de ${total} jogos limpo com sucesso!`);
+        }
+
+        function exportarJsonAuditoria() {
+            AppAudio.playClick();
+            const dados = {
+                exportado_em: new Date().toISOString(),
+                config_moeda: moedaConfig,
+                jogos: CookieHelper.get('cc_historico_jogos', []),
+                logs_auditoria: CookieHelper.get('cc_logs_auditoria', [])
+            };
+            const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `cara_e_coroa_auditoria_${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            AppToast.success('Arquivo de auditoria exportado com sucesso!');
+        }
+
+        function inspecionarLog(logId) {
+            const logs = CookieHelper.get('cc_logs_auditoria', []);
+            const log = logs.find(l => l.id === logId);
+            if (!log) return;
+            AppModal.alert(
+                `Log: ${log.tipo_acao}`,
+                `<div class="text-left font-mono text-xs max-h-60 overflow-y-auto p-2 bg-slate-950 rounded-xl text-emerald-300 whitespace-pre-wrap">${JSON.stringify(log, null, 2)}</div>`,
+                '🛡️'
+            );
+        }
+    </script>
+</body>
+</html>
